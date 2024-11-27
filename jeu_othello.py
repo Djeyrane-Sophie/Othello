@@ -3,7 +3,7 @@ from tabulate import tabulate
 #matrix = [[0 for _ in range(8)] for _ in range(8)]
 #print(tabulate(matrix, tablefmt = "fancy_grid"))
 class Cell:
-    def __init__(self, value=0):
+    def __init__(self, value='  '):
         self.__value = value
     def __repr__(self):
         return str(self.__value)
@@ -13,9 +13,7 @@ class Cell:
     def get_value(self):
         return self.__value
     def set_value(self, new_value):
-        v = ["noir", "blanc", "vide"]
-        if new_value in v:
-            self.__value = new_value
+        self.__value = new_value
         pass
 class Othellier:
     def __init__(self, row:int,col:int):
@@ -30,5 +28,12 @@ class Othellier:
     
     
 matrix = Othellier(8,8)
+
+matrix.set_cell('\u25cf',4,4)
+matrix.set_cell('\u25cf',3,3)
+matrix.set_cell('\u25cb',3,4)
+matrix.set_cell('\u25cb',4,3)
 print(matrix.appercu())
+print('\u25cf')
+print('\u25cb')
 
