@@ -85,6 +85,16 @@ class Rules(Othellier):
         self.display()     
         return valid_places
     
+    #method input coordinates of the next move
+    def input_coordinates(self):
+        string_input = input( 'write down the row and column separated by a space (example A 2 )')
+        row_input = string_input[0]
+        row_input = list('ABCDEFGH').index(row_input) #indexation entre 0 et 1
+        col_input = int(string_input[2])-1 #indexation entre 0 et 1
+        tuple_input = (row_input, col_input)
+        print(tuple_input)
+
+    
 
 
 
@@ -98,12 +108,10 @@ if __name__ == '__main__':
     matrix.set_cell('\u26ab',3,4) #black
     matrix.set_cell('\u26ab',4,3) #black
 
-    
-    matrix.valid_moves_black()
-
     # print(matrix.display())
-
-    print( matrix.count_points() )
+    matrix.valid_moves_black()
+    matrix.count_points()
+    matrix.input_coordinates()
 
     print('black = \u26aa')
     print('white = \u26ab')
