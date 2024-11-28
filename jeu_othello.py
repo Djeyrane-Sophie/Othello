@@ -1,5 +1,9 @@
 
 from tabulate import tabulate
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9960df6bc6f56f4829c76590261d44c24413b2a4
 class Cell:
     def __init__(self, value='.'):
         self.__value = value
@@ -18,7 +22,12 @@ class Othellier:
     def get_cell(self, row, col):
             return self.matrix[row][col].get_value()
     def __str__(self):
+<<<<<<< HEAD
         return ' '.join([' '.join([str(cell) for cell in row]) for row in self.matrix]) 
+=======
+        return ' '.join([' '.join([str(cell) for cell in row]) for row in self.matrix])
+
+>>>>>>> 9960df6bc6f56f4829c76590261d44c24413b2a4
     def appercu(self):
         print(tabulate(self.matrix, tablefmt = "fancy_grid"))
 
