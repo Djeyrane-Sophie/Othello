@@ -9,6 +9,11 @@ class Cell:
         return self.__value
     def set_value(self, new_value):
         self.__value = new_value
+    def flip(self): 
+        if self.color == '\u26aa':
+            self.color = '\u26ab'
+        else:
+            self.color = '\u26aa'
 
 class Othellier:
     def __init__(self, row:int,col:int):
@@ -57,6 +62,34 @@ class Rules(Othellier):
         self.appercu()     
         return valid_places
 
+    def flip_black(self, i_input, j_input): 
+        black = []
+        flip_x_direction = []
+        flip_y_direction = []
+        flip_x_y_direction = []
+        for i in range(len(self.matrix)):
+            for j in range(len(self.matrix)):
+                if self.get_cell(i,j) == '\u26aa':
+                    black.append((i,j))
+        for tuple in black:
+            delta_x = tuple[0] - i_input
+            delta_y = tuple[1] - j_input
+            if delta_x == 0:
+                break
+            elif delta_y == 0:
+                break
+            if abs(delta_y) == abs(delta_x):
+                break
+
+
+
+
+
+
+        #self.appercu()
+                
+
+
 matrix = Rules(8,8)
 
 
@@ -64,10 +97,11 @@ matrix.set_cell('\u26aa',4,4)
 matrix.set_cell('\u26aa',3,3)
 matrix.set_cell('\u26ab',3,4)
 matrix.set_cell('\u26ab',4,3)
-matrix.valid_moves_white()
-
-
+matrix.set_cell('\u26aa',4,5)
+#matrix.valid_moves_white()
+#matrix.flip_black(4,5)
 # print('black = \u26aa')
 # print('white = \u26ab')
 # print('green =\u2705')
+#matrix.flip_black()
 
