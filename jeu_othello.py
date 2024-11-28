@@ -45,11 +45,15 @@ class Othellier:
     #method count points and display scores
     def count_points(self):
         score_white = 0
+        score_black = 0
         for i in range(len(self.matrix)):
             for j in range(len(self.matrix)):
                 if self.get_cell(i, j) == '\u26aa':
                     score_white +=1
-        print(score_white)
+                if self.get_cell(i, j) == '\u26ab':
+                    score_black +=1
+        print('white score =', score_white)
+        print('black score =', score_black)
 
  
 
@@ -102,12 +106,14 @@ if __name__ == '__main__':
     matrix.set_cell('\u26aa',3,3) #white
     matrix.set_cell('\u26ab',3,4) #black
     matrix.set_cell('\u26ab',4,3) #black
+
+    
     matrix.valid_moves_black()
 
     # print(matrix.display())
 
     print( matrix.count_points() )
 
-    print('black \u26aa = \u26aa')
-    print('white \u26ab = \u26ab')
-    print('green \u2705 = \u2705')
+    print('black u26aa = \u26aa')
+    print('white u26ab = \u26ab')
+    print('green u2705 = \u2705')
