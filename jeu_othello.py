@@ -1,9 +1,5 @@
 
 from tabulate import tabulate
-<<<<<<< HEAD
-=======
-
->>>>>>> 9960df6bc6f56f4829c76590261d44c24413b2a4
 class Cell:
     def __init__(self, value='.'):
         self.__value = value
@@ -22,13 +18,9 @@ class Othellier:
     def get_cell(self, row, col):
             return self.matrix[row][col].get_value()
     def __str__(self):
-<<<<<<< HEAD
-        return ' '.join([' '.join([str(cell) for cell in row]) for row in self.matrix]) 
-=======
         return ' '.join([' '.join([str(cell) for cell in row]) for row in self.matrix])
 
->>>>>>> 9960df6bc6f56f4829c76590261d44c24413b2a4
-    def appercu(self):
+    def display(self):
         print(tabulate(self.matrix, tablefmt = "fancy_grid"))
 
 
@@ -38,8 +30,8 @@ class Rules(Othellier):
         valid_places =[]
         for i in range(len(self.matrix)):
             for j in range(len(self.matrix)):
-               if self.get_cell(i,j) == '\u26ab':
-                  direction = [(0,1),(1,0),(0,-1),(-1,0),(1,1),(-1,-1),(1,-1),(-1,1)]
+               if self.get_cell(i,j) == '\u26aa':
+                  direction = [(0,1),(1,0),(0,-1),(-1,0)]
                   for dx, dy in direction:
                       new_i = i + dx
                       new_j = j + dy
@@ -47,15 +39,15 @@ class Rules(Othellier):
                           if self.get_cell(new_i, new_j) == '.':
                               valid_places.append(self.matrix[new_i][new_j])
                               self.set_cell('\u2705',new_i, new_j)    
-        self.appercu()     
+        self.display()     
         return valid_places
 
     def valid_moves_white(self):
         valid_places =[]
         for i in range(len(self.matrix)):
             for j in range(len(self.matrix)):
-               if self.get_cell(i,j) == '\u26aa':
-                  direction = [(0,1),(1,0),(0,-1),(-1,0),(1,1),(-1,-1),(1,-1),(-1,1)]
+               if self.get_cell(i,j) == '\u26ab':
+                  direction = [(0,1),(1,0),(0,-1),(-1,0)]
                   for dx, dy in direction:
                       new_i = i + dx
                       new_j = j + dy
@@ -63,7 +55,7 @@ class Rules(Othellier):
                           if self.get_cell(new_i, new_j) == '.':
                               valid_places.append(self.matrix[new_i][new_j])
                               self.set_cell('\u2705',new_i, new_j)    
-        self.appercu()     
+        self.display()     
         return valid_places
 
 matrix = Rules(8,8)
@@ -73,7 +65,7 @@ matrix.set_cell('\u26aa',4,4)
 matrix.set_cell('\u26aa',3,3)
 matrix.set_cell('\u26ab',3,4)
 matrix.set_cell('\u26ab',4,3)
-matrix.valid_moves_white()
+matrix.valid_moves_black()
 
 
 
