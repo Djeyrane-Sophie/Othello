@@ -37,18 +37,9 @@ class Othellier:
 
     #method display initial and current
     def display(self):
+        print('_ A _ B _ C _ D _ E _ F _ G _ H')
         print(tabulate(self.matrix, tablefmt = "fancy_grid"))
     
-    #method input coordinates of the next move
-    def input_coordinates(self):
-        string_input = input( 'write down the row and column separated by a space (example A 2 )')
-        row_input = string_input[0]
-        row_input = list('ABCDEFGH').index(row_input)
-        col_input = int(string_input[2])
-        tuple_input = (row_input, col_input)
-        print(tuple_input)
-
-
     #!method update cell
 
     #method count points and display scores
@@ -102,6 +93,15 @@ class Rules(Othellier):
         self.display()     
         return valid_places
     
+    #method input coordinates of the next move
+    def input_coordinates(self):
+        string_input = input( 'write down the row and column without any space (example A2 )')
+        row_input = string_input[0]
+        row_input = list('ABCDEFGH').index(row_input) #indexation entre 0 et 1
+        col_input = int(string_input[1])-1 #indexation entre 0 et 1
+        tuple_input = (row_input, col_input)
+        print(tuple_input)
+
     #!has_valid_move (break)
 
 
@@ -119,7 +119,7 @@ if __name__ == '__main__':
     
     matrix.valid_moves_black()
     matrix.count_points()
-    matrix.input_coordinates()
+    # matrix.input_coordinates()
 
 
     print('black = \u26aa')
