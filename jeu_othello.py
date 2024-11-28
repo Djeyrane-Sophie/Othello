@@ -1,9 +1,6 @@
 
 from tabulate import tabulate
 
-#matrix = [[0 for _ in range(8)] for _ in range(8)]
-#print(tabulate(matrix, tablefmt = "fancy_grid"))
-
 class Cell:
 
     def __init__(self, value='.'):
@@ -36,13 +33,19 @@ class Othellier:
         print(tabulate(self.matrix, tablefmt = "fancy_grid"))
     
 
-matrix = Othellier(8,8)
-# print(matrix.appercu())
+if __name__ == '__main__':
 
-matrix.set_cell('\u26aa',4,4) #white
-matrix.set_cell('\u26aa',3,3) #white
-matrix.set_cell('\u26ab',3,4) #black
-matrix.set_cell('\u26ab',4,3) #black
-print(matrix.display())
-print('\u26aa')
-print('\u26ab')
+    matrix = Othellier(8,8)
+
+    matrix.set_cell('\u26aa',4,4) #white
+    matrix.set_cell('\u26aa',3,3) #white
+    matrix.set_cell('\u26ab',3,4) #black
+    matrix.set_cell('\u26ab',4,3) #black
+    print(matrix.display())
+    print('\u26aa')
+    print('\u26ab')
+
+    nb: list[int] = ['1', '2']
+
+    
+
