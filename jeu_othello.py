@@ -41,9 +41,12 @@ class Othellier:
     
     #method input coordinates of the next move
     def input_coordinates(self):
-        row_input, col_input = input( 'write down the row and column separated by a space (example 0 0 )')
-        print(row_input)
-        print(col_input)
+        string_input = input( 'write down the row and column separated by a space (example A 2 )')
+        row_input = string_input[0]
+        row_input = list('ABCDEFGH').index(row_input)
+        col_input = int(string_input[2])
+        tuple_input = (row_input, col_input)
+        print(tuple_input)
 
 
     #!method update cell
