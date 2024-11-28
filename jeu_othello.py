@@ -64,7 +64,7 @@ matrix.set_cell('\u26aa',4,4)
 matrix.set_cell('\u26aa',3,3)
 matrix.set_cell('\u26ab',3,4)
 matrix.set_cell('\u26ab',4,3)
-matrix.valid_moves_black()
+matrix.valid_moves_white()
 
 
 
@@ -73,7 +73,7 @@ matrix.valid_moves_black()
 
 
 
-print('black = \u26aa')
-print('white = \u26ab')
-print('green =\u2705')
+# print('black = \u26aa')
+# print('white = \u26ab')
+# print('green =\u2705')
 
