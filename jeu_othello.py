@@ -56,7 +56,7 @@ if __name__ == '__main__':
     print('\u26aa')
     print('\u26ab')
 
-    nb: list[int] = ['1', '2']
+
 
     
 
