@@ -39,7 +39,13 @@ class Othellier:
     def display(self):
         print(tabulate(self.matrix, tablefmt = "fancy_grid"))
     
-    #!method input coordinates of the next move
+    #method input coordinates of the next move
+    def input_coordinates(self):
+        row_input, col_input = input( 'write down the row and column separated by a space (example 0 0 )')
+        print(row_input)
+        print(col_input)
+
+
     #!method update cell
 
     #method count points and display scores
@@ -109,11 +115,10 @@ if __name__ == '__main__':
 
     
     matrix.valid_moves_black()
+    matrix.count_points()
+    matrix.input_coordinates()
 
-    # print(matrix.display())
 
-    print( matrix.count_points() )
-
-    print('black u26aa = \u26aa')
-    print('white u26ab = \u26ab')
-    print('green u2705 = \u2705')
+    print('black = \u26aa')
+    print('white = \u26ab')
+    print('valid move = \u2705')
