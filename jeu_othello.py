@@ -18,7 +18,7 @@ class Cell:
         self.__value = new_value
 
     #!method flip color to-do
-
+ 
 
 class Othellier:
 
