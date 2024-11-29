@@ -96,12 +96,12 @@ class Rules(Othellier):
     
     #method input coordinates of the next move
     def input_coordinates(self):
-        string_input = input( 'write down the row and column without any space (example A2 )')
-        row_input = string_input[0]
-        row_input = list('ABCDEFGH').index(row_input) #indexation entre 0 et 1
-        col_input = int(string_input[1])-1 #indexation entre 0 et 1
+        string_input = input( 'write down the row and column without any space (example: 5B )')
+        row_input = int(string_input[0])-1 #indexation entre 0 et 1
+        col_input = string_input[1].upper()
+        col_input = list('ABCDEFGH').index(col_input) #indexation entre 0 et 1
         tuple_input = (row_input, col_input)
-        print(tuple_input)
+        print('Requested move:', tuple_input)
         return tuple_input
 
     #!has_valid_move (break)
