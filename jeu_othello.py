@@ -58,7 +58,7 @@ class Rules(Othellier):
                           if self.get_cell(new_i, new_j) == '.':
                               valid_places.append(self.matrix[new_i][new_j])
                               self.set_cell('\u2705',new_i, new_j)    
-        self.appercu()     
+        self.display()     
         return valid_places
 
     def valid_moves_white(self):
@@ -108,17 +108,17 @@ class Rules(Othellier):
         return current_player_can_play, game_over 
 
 if __name__ == "__main__":
-    board = Rules(8, 8)
-    board.set_cell('\u25cf', 3, 3)
-    board.set_cell('\u25cb', 3, 4)
-    board.set_cell('\u25cb', 4, 3)
-    board.set_cell('\u25cf', 4, 4)
+    matrix = Rules(8, 8)
+    matrix.set_cell('\u25cf', 3, 3)
+    matrix.set_cell('\u25cb', 3, 4)
+    matrix.set_cell('\u25cb', 4, 3)
+    matrix.set_cell('\u25cf', 4, 4)
 
-    board.display()
+    matrix.display()
     current_color = '\u25cf'  # je commence avec les noirs
     while True:
 
-        can_play, game_over = board.has_valid_move(current_color)
+        can_play, game_over = matrix.has_valid_move(current_color)
         if game_over:
             print("Game Over!")
             break
