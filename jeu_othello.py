@@ -9,6 +9,11 @@ class Cell:
         return self.__value
     def set_value(self, new_value):
         self.__value = new_value
+    def flip(self):  #si la coleur est noir retourner noir et si la couleur est blanc retourner blanc
+        if self.color=="black":
+            self.color="white"
+        else:
+            self.color="black"
 
 class Othellier:
     def __init__(self, row:int,col:int):
@@ -17,6 +22,12 @@ class Othellier:
             self.matrix[row][col].set_value(value)
     def get_cell(self, row, col):
             return self.matrix[row][col].get_value()
+    def update_cell(self,value,row,col):
+        if value in ['\u25cf','\u25cb']:
+            self.matrix[row][col].set_value(value)
+            print(f"Cell ({row},{col} update to {value})")
+        else:
+            print(f"invalid value! Please use '\u25cf' for black or '\u25cb' for white")
     def __str__(self):
         return ' '.join([' '.join([str(cell) for cell in row]) for row in self.matrix]) 
     def appercu(self):
@@ -56,18 +67,28 @@ class Rules(Othellier):
                               self.set_cell('\u2705',new_i, new_j)    
         self.appercu()     
         return valid_places
+    
+    def has_valid_move(self, color):
+#  Vérifie si un joueur (noir ou blanc) a des mouvements valides.
+        if color == '\u25cf': # black
+            return bool(self.valid_moves_black()) # Si la liste des mouvements est non vide, renvoie True.
+        if color == '\u25cb': # white
+            return bool(self.valid_moves_white())
+        else:
+            raise ValueError("Couleur invalide.")
+        
+        if has_move:
+            print(f"{color.capitalized()} a des mouvements valides")
 
-matrix = Rules(8,8)
+        else: print(f"{color.capitalized()} n'a de mouvements valides")
+        return has_move
 
+matrix = Rules(8, 8)
 
-matrix.set_cell('\u26aa',4,4)
-matrix.set_cell('\u26aa',3,3)
-matrix.set_cell('\u26ab',3,4)
-matrix.set_cell('\u26ab',4,3)
-matrix.valid_moves_white()
+matrix.set_cell('\u25cf', 4, 4)
+matrix.set_cell('\u25cf', 3, 3)
+matrix.set_cell('\u25cb', 3, 4)
+matrix.set_cell('\u25cb', 4, 3)
 
-
-# print('black = \u26aa')
-# print('white = \u26ab')
-# print('green =\u2705')
-
+matrix.has_valid_move('\u25cf')
+matrix.has_valid_move('\u25cb')
