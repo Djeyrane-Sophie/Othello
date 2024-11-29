@@ -37,8 +37,9 @@ class Othellier:
 
     #method display initial and current
     def display(self):
-        print('_ A _ B _ C _ D _ E _ F _ G _ H')
-        print(tabulate(self.matrix, tablefmt = "fancy_grid"))
+        # print('_ A _ B _ C _ D _ E _ F _ G _ H')
+        print(tabulate(self.matrix, tablefmt = "fancy_grid", \
+            headers=list('ABCDEFGH'), showindex=list('12345678')))
     
     #!method update cell
 
@@ -101,6 +102,7 @@ class Rules(Othellier):
         col_input = int(string_input[1])-1 #indexation entre 0 et 1
         tuple_input = (row_input, col_input)
         print(tuple_input)
+        return tuple_input
 
     #!has_valid_move (break)
 
