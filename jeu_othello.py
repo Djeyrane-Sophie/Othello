@@ -10,10 +10,10 @@ class Cell:
     def set_value(self, new_value):
         self.__value = new_value
     def flip(self):  #si la coleur est noir retourner noir et si la couleur est blanc retourner blanc
-        if self.color=="black":
-            self.color="white"
+        if self.color=='\u25cf': #black
+            self.color='\u25cb' #white
         else:
-            self.color="black"
+            self.color='\u25cf'
 
 class Othellier:
     def __init__(self, row:int,col:int):
@@ -70,17 +70,16 @@ class Rules(Othellier):
     
     def has_valid_move(self, color):
 #  Vérifie si un joueur (noir ou blanc) a des mouvements valides.
+ 
         if color == '\u25cf': # black
             return bool(self.valid_moves_black()) # Si la liste des mouvements est non vide, renvoie True.
         if color == '\u25cb': # white
-            return bool(self.valid_moves_white())
-        else:
-            raise ValueError("Couleur invalide.")
+            return bool(self.valid_moves_white())      
         
         if has_move:
             print(f"{color.capitalized()} a des mouvements valides")
 
-        else: print(f"{color.capitalized()} n'a de mouvements valides")
+        else: print(f"{color.capitalized()} n'a pas de mouvements valides")
         return has_move
 
 matrix = Rules(8, 8)
