@@ -49,6 +49,8 @@ class Othellier:
         print('white score =', score_white)
         print('black score =', score_black)
 
+
+
  
 
 class Rules(Othellier):
@@ -89,18 +91,19 @@ class Rules(Othellier):
     
     #method input coordinates of the next move
     def input_coordinates(self):
-        string_input = input( 'write down the row and column separated by a space (example A 2 )')
-        row_input = string_input[0]
-        row_input = list('ABCDEFGH').index(row_input) #indexation entre 0 et 1
-        col_input = int(string_input[2])-1 #indexation entre 0 et 1
+        string_input = input( 'write down the row and column without any space (example: 5B )')
+        row_input = int(string_input[0])-1 #indexation entre 0 et 1
+        col_input = string_input[1].upper()
+        col_input = list('ABCDEFGH').index(col_input) #indexation entre 0 et 1
         tuple_input = (row_input, col_input)
-        print(tuple_input)
-
-    
-
+        print('Requested move:', tuple_input)
+        return tuple_input
 
 
     
+
+
+
 if __name__ == '__main__':
 
     matrix = Rules(8,8)
@@ -119,3 +122,4 @@ if __name__ == '__main__':
     print('black = \u26aa')
     print('white = \u26ab')
     print('valid move = \u2705')
+
