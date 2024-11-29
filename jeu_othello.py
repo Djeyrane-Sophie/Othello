@@ -22,16 +22,25 @@ class Othellier:
             self.matrix[row][col].set_value(value)
     def get_cell(self, row, col):
             return self.matrix[row][col].get_value()
-    def update_cell(self,value,row,col):
-        if value in ['\u25cf','\u25cb']:
-            self.matrix[row][col].set_value(value)
-            print(f"Cell ({row},{col} update to {value})")
-        else:
-            print(f"invalid value! Please use '\u25cf' for black or '\u25cb' for white")
     def __str__(self):
-        return ' '.join([' '.join([str(cell) for cell in row]) for row in self.matrix]) 
-    def appercu(self):
-        print(tabulate(self.matrix, tablefmt = "fancy_grid"))
+        return ' '.join([' '.join([str(cell) for cell in row]) for row in self.matrix])
+    #method display initial and current
+    def display(self):
+        # print('_ A _ B _ C _ D _ E _ F _ G _ H')
+        print(tabulate(self.matrix, tablefmt = "fancy_grid", \
+            headers=list('ABCDEFGH'), showindex=list('12345678')))
+    #method count points and display scores
+    def count_points(self):
+        score_white = 0
+        score_black = 0
+        for i in range(len(self.matrix)):
+            for j in range(len(self.matrix)):
+                if self.get_cell(i, j) == '\u26aa':
+                    score_white +=1
+                if self.get_cell(i, j) == '\u26ab':
+                    score_black +=1
+        print('white score =', score_white)
+        print('black score =', score_black)
 
 
 
@@ -65,29 +74,58 @@ class Rules(Othellier):
                           if self.get_cell(new_i, new_j) == '.':
                               valid_places.append(self.matrix[new_i][new_j])
                               self.set_cell('\u2705',new_i, new_j)    
-        self.appercu()     
+        self.display()     
         return valid_places
     
+  #method input coordinates of the next move
+    def input_coordinates(self):
+        string_input = input( 'write down the row and column without any space (example: 5B )')
+        row_input = int(string_input[0])-1 #indexation entre 0 et 1
+        col_input = string_input[1].upper()
+        col_input = list('ABCDEFGH').index(col_input) #indexation entre 0 et 1
+        tuple_input = (row_input, col_input)
+        print('Requested move:', tuple_input)
+        return tuple_input
+
+
     def has_valid_move(self, color):
-#  Vérifie si un joueur (noir ou blanc) a des mouvements valides.
+#  je vérifie si un joueur (noir ou blanc) a des mouvements valides.
  
         if color == '\u25cf': # black
-            return bool(self.valid_moves_black()) # Si la liste des mouvements est non vide, renvoie True.
-        if color == '\u25cb': # white
-            return bool(self.valid_moves_white())      
-        
-        if has_move:
-            print(f"{color.capitalized()} a des mouvements valides")
+            current_moves=self.valid_moves_black() 
+        else: #white 
+            current_moves=self.valid_moves_white()
+#je verifie si le joueur adv peut jouer : 
+        if color == '\u25cf': # black
+            opponent_moves= self.valid_moves_black() 
+        else: #white 
+            opponent_moves=self.valid_moves_white()
+      
+        current_player_can_play= len(current_moves)>0
+        opponent_player_can_play=len(opponent_moves)>0
 
-        else: print(f"{color.capitalized()} n'a pas de mouvements valides")
-        return has_move
+        game_over=not current_player_can_play and not opponent_player_can_play
+        return current_player_can_play, game_over 
 
-matrix = Rules(8, 8)
+if __name__ == "__main__":
+    board = Rules(8, 8)
+    board.set_cell('\u25cf', 3, 3)
+    board.set_cell('\u25cb', 3, 4)
+    board.set_cell('\u25cb', 4, 3)
+    board.set_cell('\u25cf', 4, 4)
 
-matrix.set_cell('\u25cf', 4, 4)
-matrix.set_cell('\u25cf', 3, 3)
-matrix.set_cell('\u25cb', 3, 4)
-matrix.set_cell('\u25cb', 4, 3)
+    board.display()
+    current_color = '\u25cf'  # je commence avec les noirs
+    while True:
 
-matrix.has_valid_move('\u25cf')
-matrix.has_valid_move('\u25cb')
+        can_play, game_over = board.has_valid_move(current_color)
+        if game_over:
+            print("Game Over!")
+            break
+        elif can_play:
+            print(f"{current_color} est ton tour.Fais un mouvement.")
+            #le tour du joueur.
+        else:
+            print(f"{current_color} ne peut pas jouer.Passe ton tour .")
+        #  je passe au joueur suivant
+        current_color = '\u25cb' if current_color == '\u25cf' else '\u25cf'
