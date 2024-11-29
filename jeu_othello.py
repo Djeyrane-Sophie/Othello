@@ -42,8 +42,6 @@ class Othellier:
         print('white score =', score_white)
         print('black score =', score_black)
 
-
-
 class Rules(Othellier):
     def valid_moves_black(self):
         valid_places =[]
