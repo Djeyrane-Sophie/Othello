@@ -32,7 +32,9 @@ class Othellier:
 
     #method display initial and current
     def display(self):
-        print(tabulate(self.matrix, tablefmt = "fancy_grid"))
+        # print('_ A _ B _ C _ D _ E _ F _ G _ H')
+        print(tabulate(self.matrix, tablefmt = "fancy_grid", \
+            headers=list('ABCDEFGH'), showindex=list('12345678')))
     
     #method count points and display scores
     def count_points(self):
@@ -108,11 +110,12 @@ if __name__ == '__main__':
     matrix.set_cell('\u26ab',3,4) #black
     matrix.set_cell('\u26ab',4,3) #black
 
-    # print(matrix.display())
+    
     matrix.valid_moves_black()
     matrix.count_points()
     matrix.input_coordinates()
 
+
     print('black = \u26aa')
     print('white = \u26ab')
-    print('green = \u2705')
+    print('valid move = \u2705')
