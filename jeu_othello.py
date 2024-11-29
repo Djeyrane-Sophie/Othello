@@ -68,42 +68,55 @@ class Rules(Othellier):
         black = []
         for i in range(len(self.matrix)):
             for j in range(len(self.matrix)):
-                if self.get_cell(i,j) == '\u26aa':
+                if self.get_cell(i,j) == '\u26ab':
                     black.append((i,j))
         for tuple in black:
-            delta_x = tuple[0] - i_input
-            delta_y = tuple[1] - j_input
-            if delta_x == 0:
+            # print(tuple)
+            # print(i_input,j_input)
+            delta_x = i_input - tuple[0]
+            delta_y = j_input - tuple[1]
+            if delta_x == 0 and delta_y != 0:
+                ready_to_flip_x_pos = []
+                ready_to_flip_values = []
                 for j_1 in range(1,abs(delta_y)):
-                    if delta_y > 0:
-                        if self.get_cell(i_input , j_input + j_1) == '\u26aa' or self.get_cell(i_input , j_input + j_1) == '.':
-                            break
-                        else:
-                            self.flip_cell(i_input , j_input + j_1)
-                    elif delta_y < 0:
-                        if self.get_cell(i_input , j_input - j_1) == '\u26aa' or self.get_cell(i_input , j_input - j_1) == '.':
-                            break
-                        else:
-                            self.flip_cell(i_input , j_input - j_1)
+                    ready_to_flip_x_pos.append((tuple[0],tuple[1] - j_1))
+        # print(ready_to_flip_x_pos)
+                # for t1 in ready_to_flip_x:
+                #     ready_to_flip_values.append(self.get_cell(t1[0],t1[1]))
+                #     if all(element == '\u26aa' for element in ready_to_flip_values):
+                #         self.flip_cell(t1[0],t1[1])
+                # print(tuple)
+                # print(delta_y)
+                # print(delta_x)
 
 
-            elif delta_y == 0:
-                for i_1 in range(1,abs(delta_x)):
-                    if delta_x < 0:
-                        if self.get_cell(i_input + i_1 , j_input) == '\u26aa' or self.get_cell(i_input + i_1 , j_input) == '.':
-                            break
-                        else:
-                            self.flip_cell(i_input + i_1 , j_input)
-                    elif delta_x < 0:
-                        if (i_input + i_1 , j_input) == '\u26aa' or self.get_cell(i_input , j_input - j_1) == '.':
-                            break
-                        else:
-                            self.flip_cell(i_input + i_1 , j_input)
-            # if abs(delta_y) == abs(delta_x):
-            #     for i_2 in range(1,abs(delta_x)):
-            #         for j_2 in range(1,abs(delta_y)):
-            #             if delta_y:
-            #                 if self.get_cell(t_3[0]+ i_2,t_3[1] + j_2) == '\u26aa' or self.get_cell(t_3[0]+ i_2,t_3[1] + j_2) == '.':
+            # elif delta_y == 0:
+        #         for i_1 in range(1,abs(delta_x)):
+        #     elif abs(delta_y) == abs(delta_x):
+        #         for i_2 in range(1,abs(delta_x)):
+        #             for j_2 in range(1,abs(delta_y)):
+        #                 if delta_y > 0 and delta_x > 0:
+        #                     if self.get_cell(i_input + i_2, j_input + j_2) == '\u26ab' or self.get_cell(i_input + i_2, j_input + j_2) == '.':
+        #                         break
+        #                     else:
+        #                         self.flip_cell(i_input + i_2, j_input + j_2)
+        #                 elif delta_y > 0 and delta_x < 0:
+        #                     if self.get_cell(i_input - i_2, j_input + j_2) == '\u26ab' or self.get_cell(i_input - i_2, j_input + j_2) == '.':
+        #                         break
+        #                     else:
+        #                         self.flip_cell(i_input - i_2, j_input + j_2)
+        #                 elif delta_y < 0 and delta_x > 0:
+        #                     if self.get_cell(i_input + i_2, j_input - j_2) == '\u26ab' or self.get_cell(i_input + i_2, j_input - j_2) == '.':
+        #                         break
+        #                     else:
+        #                         self.flip_cell(i_input + i_2, j_input - j_2)
+        #                 elif delta_y < 0 and delta_x < 0:
+        #                     if self.get_cell(i_input + i_2, j_input + j_2) == '\u26ab' or self.get_cell(i_input + i_2, j_input + j_2) == '.':
+        #                         break
+        #                     else:
+        #                         self.flip_cell(i_input + i_2, j_input + j_2)
+        self.appercu()
+        # print(black)
 
 
 
@@ -122,9 +135,18 @@ matrix.set_cell('\u26aa',4,4)
 matrix.set_cell('\u26aa',3,3)
 matrix.set_cell('\u26ab',3,4)
 matrix.set_cell('\u26ab',4,3)
-matrix.set_cell('\u26aa',4,5)
+# points for test deltax=0 
+# matrix.set_cell('\u26ab',0,0)
+# matrix.set_cell('\u26aa',0,1)
+# matrix.set_cell('\u26aa',0,2)
+# matrix.set_cell('\u26ab',0,3)
+# matrix.set_cell('\u26aa',0,4)
+# matrix.set_cell('\u26ab',0,5)
+# matrix.flip_black(0,3)
+# points for test deltay=0 
 #matrix.flip_cell(4,4)
-#matrix.appercu()
+# matrix.appercu()
+
 #matrix.valid_moves_white()
 #matrix.flip_black(4,5)
 # print('black = \u26aa')
