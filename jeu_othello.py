@@ -10,10 +10,10 @@ class Cell:
     def set_value(self, new_value):
         self.__value = new_value
     def flip(self): 
-        if self.color == '\u26aa':
-            self.color = '\u26ab'
+        if self.__value == '\u26aa':
+            self.__value = '\u26ab'
         else:
-            self.color = '\u26aa'
+            self.__value = '\u26aa'
 
 class Othellier:
     def __init__(self, row:int,col:int):
@@ -22,6 +22,8 @@ class Othellier:
             self.matrix[row][col].set_value(value)
     def get_cell(self, row, col):
             return self.matrix[row][col].get_value()
+    def flip_cell(self, row, col):
+        self.matrix[row][col].flip()
     def __str__(self):
         return ' '.join([' '.join([str(cell) for cell in row]) for row in self.matrix]) 
     def appercu(self):
@@ -35,7 +37,7 @@ class Rules(Othellier):
         for i in range(len(self.matrix)):
             for j in range(len(self.matrix)):
                if self.get_cell(i,j) == '\u26ab':
-                  direction = [(0,1),(1,0),(0,-1),(-1,0),(1,1),(-1,-1),(1,-1),(-1,1)]
+                  direction = [(0,1),(1,0),(0,-1),(-1,0)]
                   for dx, dy in direction:
                       new_i = i + dx
                       new_j = j + dy
@@ -51,7 +53,7 @@ class Rules(Othellier):
         for i in range(len(self.matrix)):
             for j in range(len(self.matrix)):
                if self.get_cell(i,j) == '\u26aa':
-                  direction = [(0,1),(1,0),(0,-1),(-1,0),(1,1),(-1,-1),(1,-1),(-1,1)]
+                  direction = [(0,1),(1,0),(0,-1),(-1,0)]
                   for dx, dy in direction:
                       new_i = i + dx
                       new_j = j + dy
@@ -64,9 +66,6 @@ class Rules(Othellier):
 
     def flip_black(self, i_input, j_input): 
         black = []
-        flip_x_direction = []
-        flip_y_direction = []
-        flip_x_y_direction = []
         for i in range(len(self.matrix)):
             for j in range(len(self.matrix)):
                 if self.get_cell(i,j) == '\u26aa':
@@ -75,11 +74,37 @@ class Rules(Othellier):
             delta_x = tuple[0] - i_input
             delta_y = tuple[1] - j_input
             if delta_x == 0:
-                break
+                for j_1 in range(1,abs(delta_y)):
+                    if delta_y > 0:
+                        if self.get_cell(i_input , j_input + j_1) == '\u26aa' or self.get_cell(i_input , j_input + j_1) == '.':
+                            break
+                        else:
+                            self.flip_cell(i_input , j_input + j_1)
+                    elif delta_y < 0:
+                        if self.get_cell(i_input , j_input - j_1) == '\u26aa' or self.get_cell(i_input , j_input - j_1) == '.':
+                            break
+                        else:
+                            self.flip_cell(i_input , j_input - j_1)
+
+
             elif delta_y == 0:
-                break
-            if abs(delta_y) == abs(delta_x):
-                break
+                for i_1 in range(1,abs(delta_x)):
+                    if delta_x < 0:
+                        if self.get_cell(i_input + i_1 , j_input) == '\u26aa' or self.get_cell(i_input + i_1 , j_input) == '.':
+                            break
+                        else:
+                            self.flip_cell(i_input + i_1 , j_input)
+                    elif delta_x < 0:
+                        if (i_input + i_1 , j_input) == '\u26aa' or self.get_cell(i_input , j_input - j_1) == '.':
+                            break
+                        else:
+                            self.flip_cell(i_input + i_1 , j_input)
+            # if abs(delta_y) == abs(delta_x):
+            #     for i_2 in range(1,abs(delta_x)):
+            #         for j_2 in range(1,abs(delta_y)):
+            #             if delta_y:
+            #                 if self.get_cell(t_3[0]+ i_2,t_3[1] + j_2) == '\u26aa' or self.get_cell(t_3[0]+ i_2,t_3[1] + j_2) == '.':
+
 
 
 
@@ -98,10 +123,14 @@ matrix.set_cell('\u26aa',3,3)
 matrix.set_cell('\u26ab',3,4)
 matrix.set_cell('\u26ab',4,3)
 matrix.set_cell('\u26aa',4,5)
+#matrix.flip_cell(4,4)
+#matrix.appercu()
 #matrix.valid_moves_white()
 #matrix.flip_black(4,5)
 # print('black = \u26aa')
 # print('white = \u26ab')
 # print('green =\u2705')
 #matrix.flip_black()
+#        flip_x_direction = []
+#flip_y_direction = [] flip_x_y_direction = []
 
