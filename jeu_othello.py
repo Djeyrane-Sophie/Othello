@@ -93,6 +93,7 @@ class Rules(Othellier):
         col_input = list('ABCDEFGH').index(col_input) #indexation entre 0 et 1
         tuple_input = (row_input, col_input)
         print('Requested move:', tuple_input)
+        return tuple_input
 
     
 
